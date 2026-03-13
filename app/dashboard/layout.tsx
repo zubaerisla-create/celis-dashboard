@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 
 import logo from "../../public/logo.png"
+import LogoContainer from '@/components/ReUsableComponent/LogoContainer/LogoContainer';
 
 const sidebarItems = [
   { 
@@ -248,7 +249,7 @@ export default function DashboardLayout({
       {/* Mobile Menu Button */}
       <button
         onClick={() => setSidebarOpen(true)}
-        className="lg:hidden fixed top-4 left-4 z-30 p-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-xl shadow-lg hover:shadow-red-500/20 transition-all duration-300 hover:scale-105"
+        className="lg:hidden fixed top-4 left-4 z-30 p-3 bg-gradient-to-r from-[#E54FA9] to-[#831CDF] text-white rounded-xl shadow-lg hover:shadow-[#831CDF]/30 transition-all duration-300 hover:scale-105"
       >
         <Menu size={20} />
       </button>
@@ -259,29 +260,34 @@ export default function DashboardLayout({
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        {/* Logo Area with Gradient */}
-        <div className="relative h-20 px-4 flex items-center justify-between border-b border-gray-800/50">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8  rounded-lg flex items-center justify-center">
-              <Image height={40} width={40} src={logo} alt="Spartst Logo" />
-            </div>
-            <div>
-              <h2 className="text-white text-red-700 font-semibold text-lg">SPARTST</h2>
-              <p className="text-gray-400 text-[10px] leading-tight">Admin Dashboard</p>
-            </div>
+        {/* Logo Area with Admin Dashboard text below */}
+        <div className="relative pt-6 pb-4 px-4 flex flex-col items-center border-b border-gray-800/50">
+          <div className="mb-2">
+            <LogoContainer/>
           </div>
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-1.5 mb-0.5">
+              <Shield size={14} className="text-[#E54FA9]" />
+              <span className="text-xs font-medium bg-gradient-to-r from-[#E54FA9] to-[#831CDF] bg-clip-text text-transparent">
+                ADMIN DASHBOARD
+              </span>
+              <Shield size={14} className="text-[#831CDF]" />
+            </div>
+            <p className="text-[10px] text-gray-500">v2.0 • Secure Access</p>
+          </div>
+          
+          {/* Close button for mobile */}
           <button
             onClick={() => setSidebarOpen(false)}
-            className="lg:hidden text-gray-400 hover:text-white hover:bg-gray-800/50 p-1.5 rounded-lg transition-colors"
+            className="absolute top-4 right-4 lg:hidden text-gray-400 hover:text-white hover:bg-gray-800/50 p-1.5 rounded-lg transition-colors"
           >
             <X size={18} />
           </button>
         </div>
 
-
         {/* Scrollable Navigation Area */}
-        <div className="h-[calc(100vh-12rem)] overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-800 scrollbar-track-transparent hover:scrollbar-thumb-gray-700">
-          <nav className="py-2 px-3">
+        <div className="h-[calc(100vh-9rem)] overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-800 scrollbar-track-transparent hover:scrollbar-thumb-gray-700">
+          <nav className="py-4 px-3">
             {sidebarGroups.map((group) => (
               <div key={group.title} className="mb-4">
                 {/* Group Header */}
@@ -312,7 +318,7 @@ export default function DashboardLayout({
                         href={item.href}
                         className={`group relative flex items-center px-4 py-2 rounded-lg transition-all duration-200 ${
                           isActive
-                            ? 'bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg shadow-red-600/20'
+                            ? 'bg-gradient-to-r from-[#E54FA9] to-[#831CDF] text-white shadow-lg shadow-[#831CDF]/20'
                             : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
                         }`}
                         onClick={() => isMobile && setSidebarOpen(false)}
@@ -330,7 +336,7 @@ export default function DashboardLayout({
 
                         {/* Badge for new items */}
                         {item.name === 'Payout Requests' && (
-                          <span className="ml-auto px-1.5 py-0.5 text-[10px] bg-red-500 text-white rounded-full animate-pulse">
+                          <span className="ml-auto px-1.5 py-0.5 text-[10px] bg-gradient-to-r from-[#E54FA9] to-[#831CDF] text-white rounded-full animate-pulse">
                             3
                           </span>
                         )}
@@ -341,6 +347,14 @@ export default function DashboardLayout({
               </div>
             ))}
           </nav>
+
+          {/* Footer note */}
+          <div className="px-4 py-3 mt-2">
+            <div className="text-[10px] text-gray-600 text-center border-t border-gray-800/50 pt-3">
+              <p>© 2024 SPARTST</p>
+              <p className="mt-0.5">All rights reserved</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -353,9 +367,7 @@ export default function DashboardLayout({
             <div className="lg:hidden w-8"></div>
 
             <div className="hidden lg:block flex-1 max-w-md">
-              <div className="relative">
-            
-              </div>
+              <div className="relative"></div>
             </div>
 
             {/* Right side items */}
@@ -367,11 +379,11 @@ export default function DashboardLayout({
                     setShowNotifications(!showNotifications);
                     setShowProfileMenu(false);
                   }}
-                  className="relative p-2.5 bg-gray-800/50 hover:bg-gray-800/70 rounded-lg border border-gray-700/50 transition-colors"
+                  className="relative p-2.5 bg-gray-800/50 hover:bg-gradient-to-r hover:from-[#E54FA9] hover:to-[#831CDF] rounded-lg border border-gray-700/50 transition-all"
                 >
                   <Bell size={20} className="text-gray-300" />
                   {unreadCount > 0 && (
-                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-600 text-white text-xs font-bold rounded-full flex items-center justify-center animate-pulse">
+                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-[#E54FA9] to-[#831CDF] text-white text-xs font-bold rounded-full flex items-center justify-center animate-pulse">
                       {unreadCount}
                     </span>
                   )}
@@ -382,18 +394,20 @@ export default function DashboardLayout({
                   <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-gray-800 rounded-lg border border-gray-700 shadow-xl z-50">
                     <div className="p-4 border-b border-gray-700">
                       <div className="flex items-center justify-between">
-                        <h3 className="text-white font-semibold">Notifications ({unreadCount})</h3>
+                        <h3 className="text-white font-semibold">
+                          Notifications (<span className="text-[#E54FA9]">{unreadCount}</span>)
+                        </h3>
                         <div className="flex gap-3">
                           <button 
                             onClick={markAllAsRead}
-                            className="text-xs text-gray-400 hover:text-white transition-colors"
+                            className="text-xs text-gray-400 hover:text-[#E54FA9] transition-colors"
                           >
                             Mark all read
                           </button>
                           <span className="text-gray-600">|</span>
                           <button 
                             onClick={clearAll}
-                            className="text-xs text-gray-400 hover:text-white transition-colors"
+                            className="text-xs text-gray-400 hover:text-[#E54FA9] transition-colors"
                           >
                             Clear all
                           </button>
@@ -405,11 +419,11 @@ export default function DashboardLayout({
                       {notifications.map((notification) => (
                         <div
                           key={notification.id}
-                          className="p-4 border-b border-gray-700/50 hover:bg-gray-700/30 transition-colors cursor-pointer"
+                          className="p-4 border-b border-gray-700/50 hover:bg-gradient-to-r hover:from-[#E54FA9]/10 hover:to-[#831CDF]/10 transition-colors cursor-pointer group"
                         >
                           <div className="flex items-start gap-3">
                             <div className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center
-                              ${notification.type === 'alert' ? 'bg-red-500/20 text-red-500' :
+                              ${notification.type === 'alert' ? 'bg-gradient-to-r from-[#E54FA9]/20 to-[#831CDF]/20 text-[#E54FA9]' :
                                 notification.type === 'pending' ? 'bg-yellow-500/20 text-yellow-500' :
                                 notification.type === 'transaction' ? 'bg-green-500/20 text-green-500' :
                                 notification.type === 'system' ? 'bg-blue-500/20 text-blue-500' :
@@ -423,7 +437,9 @@ export default function DashboardLayout({
                               {notification.type === 'success' && <FileCheck size={16} />}
                             </div>
                             <div className="flex-1">
-                              <h4 className="text-white text-sm font-medium">{notification.title}</h4>
+                              <h4 className="text-white text-sm font-medium group-hover:text-[#E54FA9] transition-colors">
+                                {notification.title}
+                              </h4>
                               <p className="text-gray-400 text-xs mt-0.5">{notification.description}</p>
                               <p className="text-gray-500 text-xs mt-1">{notification.time}</p>
                             </div>
@@ -442,29 +458,29 @@ export default function DashboardLayout({
                     setShowProfileMenu(!showProfileMenu);
                     setShowNotifications(false);
                   }}
-                  className="flex items-center gap-2 bg-gray-800/50 hover:bg-gray-800/70 rounded-lg px-3 py-2 border border-gray-700/50 transition-colors"
+                  className="flex items-center gap-2 bg-gray-800/50 hover:bg-gradient-to-r hover:from-[#E54FA9] hover:to-[#831CDF] rounded-lg px-3 py-2 border border-gray-700/50 transition-all group"
                 >
-                  <div className="w-7 h-7 bg-gradient-to-r from-red-600 to-red-700 rounded-md flex items-center justify-center">
+                  <div className="w-7 h-7 bg-gradient-to-r from-[#E54FA9] to-[#831CDF] rounded-md flex items-center justify-center">
                     <User size={16} className="text-white" />
                   </div>
-                 <span className="text-gray-300 text-sm hidden lg:block">View Profile</span>
-                  <ChevronDown size={16} className="text-gray-500 hidden lg:block" />
+                  <span className="text-gray-300 text-sm hidden lg:block group-hover:text-white transition-colors">View Profile</span>
+                  <ChevronDown size={16} className="text-gray-500 hidden lg:block group-hover:text-white transition-colors" />
                 </button>
 
                 {/* Profile Dropdown */}
                 {showProfileMenu && (
-                  <div className="absolute right-0 mt-1 w-48 bg-gray-800 rounded-lg border border-gray-700 shadow-xl z-50">
+                  <div className="absolute right-0 mt-1 w-48 bg-gray-800 rounded-lg border border-gray-700 shadow-xl z-50 overflow-hidden">
                     <Link
-                      href="/profile"
-                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-300 hover:bg-gray-700 rounded-t-lg"
+                      href="/dashboard/profile"
+                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-300 hover:bg-gradient-to-r hover:from-[#E54FA9] hover:to-[#831CDF] transition-all"
                       onClick={() => setShowProfileMenu(false)}
                     >
                       <User size={16} />
-                <Link href="/dashboard/settings" >  <span className="text-gray-300 text-sm hidden lg:block">View Profile</span></Link>
+                      <span>View Profile</span>
                     </Link>
                     <Link
                       href="/login"
-                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-300 hover:bg-gray-700 rounded-b-lg border-t border-gray-700"
+                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-300 hover:bg-gradient-to-r hover:from-[#E54FA9] hover:to-[#831CDF] transition-all border-t border-gray-700"
                       onClick={() => setShowProfileMenu(false)}
                     >
                       <LogOut size={16} />
