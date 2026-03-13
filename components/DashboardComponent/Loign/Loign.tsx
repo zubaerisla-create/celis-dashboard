@@ -14,7 +14,7 @@ export default function AdminLoginPage() {
         <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-r from-[#E54FA9]/20 to-[#831CDF]/20 rounded-full blur-3xl" />
         <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-gradient-to-r from-[#831CDF]/20 to-[#E54FA9]/20 rounded-full blur-3xl" />
 
-        {/* Header / Logo area */}
+        {/* Header  Logo area */}
         <div className="flex items-center justify-center gap-3 pt-8 relative z-10">
           <LogoContainer/>
           <div>
